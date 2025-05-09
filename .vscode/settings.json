@@ -1,0 +1,11 @@
+{
+    "idf.customExtraVars": {
+        "ESP_MATTER_DEVICE_PATH": "/Users/bensmith/esp/esp-idf",
+        "IDF_TARGET": "esp32"
+    },
+    "idf.openOcdConfigs": [
+        "interface/ftdi/esp32_devkitj_v1.cfg",
+        "target/esp32.cfg"
+    ],
+    "idf.port": "/dev/tty.wchusbserial54E20347031"
+}

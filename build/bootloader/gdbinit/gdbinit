@@ -1,0 +1,2 @@
+source /Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build/bootloader/gdbinit/symbols
+source /Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build/bootloader/gdbinit/connect
