@@ -214,87 +214,12 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build/esp-idf/esp_phy/cmake_install.cmake")
-endif()
-
-if(NOT CMAKE_INSTALL_LOCAL_ONLY)
-  # Include the install script for the subdirectory.
-  include("/Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build/esp-idf/esp_driver_usb_serial_jtag/cmake_install.cmake")
-endif()
-
-if(NOT CMAKE_INSTALL_LOCAL_ONLY)
-  # Include the install script for the subdirectory.
-  include("/Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build/esp-idf/esp_vfs_console/cmake_install.cmake")
-endif()
-
-if(NOT CMAKE_INSTALL_LOCAL_ONLY)
-  # Include the install script for the subdirectory.
-  include("/Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build/esp-idf/vfs/cmake_install.cmake")
-endif()
-
-if(NOT CMAKE_INSTALL_LOCAL_ONLY)
-  # Include the install script for the subdirectory.
-  include("/Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build/esp-idf/lwip/cmake_install.cmake")
-endif()
-
-if(NOT CMAKE_INSTALL_LOCAL_ONLY)
-  # Include the install script for the subdirectory.
-  include("/Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build/esp-idf/esp_netif_stack/cmake_install.cmake")
-endif()
-
-if(NOT CMAKE_INSTALL_LOCAL_ONLY)
-  # Include the install script for the subdirectory.
-  include("/Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build/esp-idf/esp_netif/cmake_install.cmake")
-endif()
-
-if(NOT CMAKE_INSTALL_LOCAL_ONLY)
-  # Include the install script for the subdirectory.
-  include("/Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build/esp-idf/wpa_supplicant/cmake_install.cmake")
-endif()
-
-if(NOT CMAKE_INSTALL_LOCAL_ONLY)
-  # Include the install script for the subdirectory.
-  include("/Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build/esp-idf/esp_coex/cmake_install.cmake")
-endif()
-
-if(NOT CMAKE_INSTALL_LOCAL_ONLY)
-  # Include the install script for the subdirectory.
-  include("/Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build/esp-idf/esp_wifi/cmake_install.cmake")
+  include("/Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build/esp-idf/esp_driver_pcnt/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
   include("/Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build/esp-idf/esp_driver_spi/cmake_install.cmake")
-endif()
-
-if(NOT CMAKE_INSTALL_LOCAL_ONLY)
-  # Include the install script for the subdirectory.
-  include("/Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build/esp-idf/esp_gdbstub/cmake_install.cmake")
-endif()
-
-if(NOT CMAKE_INSTALL_LOCAL_ONLY)
-  # Include the install script for the subdirectory.
-  include("/Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build/esp-idf/bt/cmake_install.cmake")
-endif()
-
-if(NOT CMAKE_INSTALL_LOCAL_ONLY)
-  # Include the install script for the subdirectory.
-  include("/Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build/esp-idf/unity/cmake_install.cmake")
-endif()
-
-if(NOT CMAKE_INSTALL_LOCAL_ONLY)
-  # Include the install script for the subdirectory.
-  include("/Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build/esp-idf/cmock/cmake_install.cmake")
-endif()
-
-if(NOT CMAKE_INSTALL_LOCAL_ONLY)
-  # Include the install script for the subdirectory.
-  include("/Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build/esp-idf/console/cmake_install.cmake")
-endif()
-
-if(NOT CMAKE_INSTALL_LOCAL_ONLY)
-  # Include the install script for the subdirectory.
-  include("/Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build/esp-idf/esp_driver_pcnt/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
@@ -339,11 +264,6 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build/esp-idf/esp_driver_bitscrambler/cmake_install.cmake")
-endif()
-
-if(NOT CMAKE_INSTALL_LOCAL_ONLY)
-  # Include the install script for the subdirectory.
   include("/Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build/esp-idf/esp_driver_rmt/cmake_install.cmake")
 endif()
 
@@ -374,12 +294,77 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build/esp-idf/esp_driver_twai/cmake_install.cmake")
+  include("/Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build/esp-idf/esp_driver_usb_serial_jtag/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
   include("/Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build/esp-idf/driver/cmake_install.cmake")
+endif()
+
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
+  include("/Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build/esp-idf/esp_phy/cmake_install.cmake")
+endif()
+
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
+  include("/Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build/esp-idf/esp_vfs_console/cmake_install.cmake")
+endif()
+
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
+  include("/Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build/esp-idf/vfs/cmake_install.cmake")
+endif()
+
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
+  include("/Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build/esp-idf/lwip/cmake_install.cmake")
+endif()
+
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
+  include("/Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build/esp-idf/esp_netif_stack/cmake_install.cmake")
+endif()
+
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
+  include("/Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build/esp-idf/esp_netif/cmake_install.cmake")
+endif()
+
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
+  include("/Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build/esp-idf/wpa_supplicant/cmake_install.cmake")
+endif()
+
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
+  include("/Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build/esp-idf/esp_coex/cmake_install.cmake")
+endif()
+
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
+  include("/Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build/esp-idf/esp_wifi/cmake_install.cmake")
+endif()
+
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
+  include("/Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build/esp-idf/bt/cmake_install.cmake")
+endif()
+
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
+  include("/Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build/esp-idf/unity/cmake_install.cmake")
+endif()
+
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
+  include("/Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build/esp-idf/cmock/cmake_install.cmake")
+endif()
+
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
+  include("/Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build/esp-idf/console/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
@@ -409,11 +394,6 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build/esp-idf/esp_psram/cmake_install.cmake")
-endif()
-
-if(NOT CMAKE_INSTALL_LOCAL_ONLY)
-  # Include the install script for the subdirectory.
   include("/Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build/esp-idf/esp_driver_jpeg/cmake_install.cmake")
 endif()
 
@@ -430,6 +410,11 @@ endif()
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
   include("/Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build/esp-idf/esp_eth/cmake_install.cmake")
+endif()
+
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
+  include("/Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build/esp-idf/esp_gdbstub/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
@@ -460,6 +445,11 @@ endif()
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
   include("/Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build/esp-idf/esp_https_server/cmake_install.cmake")
+endif()
+
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
+  include("/Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build/esp-idf/esp_psram/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
@@ -555,6 +545,136 @@ endif()
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
   include("/Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build/esp-idf/wifi_provisioning/cmake_install.cmake")
+endif()
+
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
+  include("/Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build/esp-idf/chmorgan__esp-libhelix-mp3/cmake_install.cmake")
+endif()
+
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
+  include("/Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build/esp-idf/espressif__esp-modbus/cmake_install.cmake")
+endif()
+
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
+  include("/Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build/esp-idf/espressif__esp-zboss-lib/cmake_install.cmake")
+endif()
+
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
+  include("/Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build/esp-idf/espressif__esp-zigbee-lib/cmake_install.cmake")
+endif()
+
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
+  include("/Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build/esp-idf/espressif__libsodium/cmake_install.cmake")
+endif()
+
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
+  include("/Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build/esp-idf/espressif__mdns/cmake_install.cmake")
+endif()
+
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
+  include("/Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build/esp-idf/espressif__cbor/cmake_install.cmake")
+endif()
+
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
+  include("/Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build/esp-idf/espressif__esp-dsp/cmake_install.cmake")
+endif()
+
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
+  include("/Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build/esp-idf/espressif__esp_diag_data_store/cmake_install.cmake")
+endif()
+
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
+  include("/Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build/esp-idf/espressif__rmaker_common/cmake_install.cmake")
+endif()
+
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
+  include("/Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build/esp-idf/espressif__esp_diagnostics/cmake_install.cmake")
+endif()
+
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
+  include("/Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build/esp-idf/espressif__esp_insights/cmake_install.cmake")
+endif()
+
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
+  include("/Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build/esp-idf/espressif__esp_modem/cmake_install.cmake")
+endif()
+
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
+  include("/Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build/esp-idf/espressif__jsmn/cmake_install.cmake")
+endif()
+
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
+  include("/Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build/esp-idf/espressif__json_parser/cmake_install.cmake")
+endif()
+
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
+  include("/Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build/esp-idf/espressif__json_generator/cmake_install.cmake")
+endif()
+
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
+  include("/Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build/esp-idf/espressif__esp_schedule/cmake_install.cmake")
+endif()
+
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
+  include("/Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build/esp-idf/espressif__network_provisioning/cmake_install.cmake")
+endif()
+
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
+  include("/Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build/esp-idf/espressif__esp-serial-flasher/cmake_install.cmake")
+endif()
+
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
+  include("/Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build/esp-idf/espressif__esp_rcp_update/cmake_install.cmake")
+endif()
+
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
+  include("/Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build/esp-idf/espressif__esp_secure_cert_mgr/cmake_install.cmake")
+endif()
+
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
+  include("/Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build/esp-idf/espressif__esp_rainmaker/cmake_install.cmake")
+endif()
+
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
+  include("/Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build/esp-idf/espressif__qrcode/cmake_install.cmake")
+endif()
+
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
+  include("/Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build/esp-idf/joltwallet__littlefs/cmake_install.cmake")
+endif()
+
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
+  include("/Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build/esp-idf/arduino/cmake_install.cmake")
+endif()
+
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
+  include("/Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build/esp-idf/waveshare_7.5_EPD_esp-idf/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)

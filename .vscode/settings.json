@@ -14,5 +14,10 @@
     },
     "terminal.integrated.env.osx": {
       "IDF_PATH": "/Users/bensmith/esp/esp-idf"
+    },
+    "files.associations": {
+      "gpio.h": "c",
+      "freertosconfig.h": "c",
+      "cstring": "c"
     }
   }

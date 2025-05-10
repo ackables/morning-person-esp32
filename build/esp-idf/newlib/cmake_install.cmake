@@ -39,7 +39,7 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build/esp-idf/newlib/src/port/cmake_install.cmake")
+  include("/Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build/esp-idf/newlib/port/cmake_install.cmake")
 endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
