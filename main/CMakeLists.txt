@@ -1,5 +1,5 @@
 idf_component_register(
-    SRCS "main.c"
+    SRCS "main.cpp"
     INCLUDE_DIRS "."
-    REQUIRES arduino waveshare_7.5_EPD_esp-idf
+    REQUIRES arduino esp32-waveshare-epd
 )

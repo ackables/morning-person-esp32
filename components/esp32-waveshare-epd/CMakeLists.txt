@@ -1,0 +1,20 @@
+idf_component_register(
+    SRCS "src/DEV_Config.cpp"
+         "src/DEV_Config.h"
+         "src/utility/EPD_7in5_V2.cpp"
+         "src/utility/EPD_7in5_V2.h"
+         "src/EPD.h"
+         "src/GUI_Paint.cpp"
+         "src/GUI_Paint.h"
+         "examples/epd7in5_V2-demo/ImageData.c"
+         "examples/epd7in5_V2-demo/ImageData.h"
+         "src/utility/Debug.h"
+         "src/font8.cpp"
+         "src/font12.cpp"
+         "src/font16.cpp"
+         "src/font20.cpp"
+         "src/font24.cpp"
+         "src/fonts.h"
+    INCLUDE_DIRS "src" "src/utility" "extras" "." "examples/epd7in5_V2-demo"
+    REQUIRES arduino
+)

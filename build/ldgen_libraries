@@ -103,5 +103,5 @@
 /Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build/esp-idf/espressif__qrcode/libespressif__qrcode.a
 /Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build/esp-idf/joltwallet__littlefs/libjoltwallet__littlefs.a
 /Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build/esp-idf/arduino/libarduino.a
-/Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build/esp-idf/waveshare_7.5_EPD_esp-idf/libwaveshare_7.5_EPD_esp-idf.a
+/Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build/esp-idf/esp32-waveshare-epd/libesp32-waveshare-epd.a
 /Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build/esp-idf/main/libmain.a

@@ -674,7 +674,7 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build/esp-idf/waveshare_7.5_EPD_esp-idf/cmake_install.cmake")
+  include("/Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build/esp-idf/esp32-waveshare-epd/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
