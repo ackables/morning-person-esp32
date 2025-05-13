@@ -679,6 +679,11 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
+  include("/Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build/esp-idf/routineScheduling/cmake_install.cmake")
+endif()
+
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
   include("/Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build/esp-idf/main/cmake_install.cmake")
 endif()
 

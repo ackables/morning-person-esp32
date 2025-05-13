@@ -143,6 +143,7 @@
 		"/Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build/esp-idf/joltwallet__littlefs/cmake_install.cmake",
 		"/Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build/esp-idf/arduino/cmake_install.cmake",
 		"/Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build/esp-idf/esp32-waveshare-epd/cmake_install.cmake",
+		"/Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build/esp-idf/routineScheduling/cmake_install.cmake",
 		"/Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build/esp-idf/main/cmake_install.cmake"
 	],
 	"Parallel" : false

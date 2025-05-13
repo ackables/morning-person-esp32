@@ -7,7 +7,7 @@ CMake Deprecation Warning at /Users/bensmith/esp/esp-idf/components/mbedtls/mbed
   to work with policies introduced by <max> or earlier.
 
 
-ESP Insights Project commit: 8eeb6c3d-dirty
+ESP Insights Project commit: 60bc8b6-dirty
 CMake Deprecation Warning at managed_components/espressif__esp-serial-flasher/CMakeLists.txt:1 (cmake_minimum_required):
   Compatibility with CMake < 3.10 will be removed from a future version of
   CMake.
@@ -17,4 +17,4 @@ CMake Deprecation Warning at managed_components/espressif__esp-serial-flasher/CM
   to work with policies introduced by <max> or earlier.
 
 
-ESP RainMaker Project commit: 8eeb6c3d-dirty
+ESP RainMaker Project commit: 60bc8b6-dirty

@@ -1003,6 +1003,13 @@
 /Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build/esp-idf/esp32-waveshare-epd/CMakeFiles/install.dir
 /Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build/esp-idf/esp32-waveshare-epd/CMakeFiles/install/local.dir
 /Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build/esp-idf/esp32-waveshare-epd/CMakeFiles/install/strip.dir
+/Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build/esp-idf/routineScheduling/CMakeFiles/__idf_routineScheduling.dir
+/Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build/esp-idf/routineScheduling/CMakeFiles/edit_cache.dir
+/Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build/esp-idf/routineScheduling/CMakeFiles/rebuild_cache.dir
+/Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build/esp-idf/routineScheduling/CMakeFiles/list_install_components.dir
+/Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build/esp-idf/routineScheduling/CMakeFiles/install.dir
+/Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build/esp-idf/routineScheduling/CMakeFiles/install/local.dir
+/Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build/esp-idf/routineScheduling/CMakeFiles/install/strip.dir
 /Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build/esp-idf/main/CMakeFiles/__idf_main.dir
 /Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build/esp-idf/main/CMakeFiles/edit_cache.dir
 /Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build/esp-idf/main/CMakeFiles/rebuild_cache.dir

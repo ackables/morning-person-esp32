@@ -104,4 +104,5 @@
 /Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build/esp-idf/joltwallet__littlefs/libjoltwallet__littlefs.a
 /Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build/esp-idf/arduino/libarduino.a
 /Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build/esp-idf/esp32-waveshare-epd/libesp32-waveshare-epd.a
+/Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build/esp-idf/routineScheduling/libroutineScheduling.a
 /Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build/esp-idf/main/libmain.a
