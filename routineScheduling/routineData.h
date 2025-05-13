@@ -3,6 +3,9 @@
 
 #include <stdlib.h>
 
+#define MAX_TASKS 10
+
+
 typedef struct {
     float lat;
     float lon;

@@ -8,6 +8,9 @@
 #include "routineData.h"
 #include "json_parser.h"
 
+extern Task task_list[MAX_TASKS];
+extern int task_count;
+
 void parse_tasks(jparse_ctx_t *jctx);
 void load_and_parse_json_file(const char *path);
 

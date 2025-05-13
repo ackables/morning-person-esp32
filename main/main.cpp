@@ -33,9 +33,17 @@ if (ret != ESP_OK) {
 } else if(ret == ESP_OK) {
     ESP_LOGI("SPIFFS", "SPIFFS mounted successfully");
 }
-
+// FILE *f = fopen("/spiffs/testData.json", "r");
+// if (f) {
+//     char line[128];
+//     printf("Contents of testData.json:\n");
+//     while (fgets(line, sizeof(line), f)) {
+//         printf("%s", line);
+//     }
+//     fclose(f);
+// }
 
   load_and_parse_json_file(path);
+  printf("Task count = %d\n", task_count);
 
 }
-

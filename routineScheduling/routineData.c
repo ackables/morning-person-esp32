@@ -10,6 +10,10 @@
 
 Coordinates homeCoords = {0.0f, 0.0f};
 
+// #define MAX_TASKS 10
+Task task_list[MAX_TASKS];
+int task_count = 0;
+
 // // A single task entry
 // typedef struct {
 //     char name[32];   // Fixed size for simplicity
