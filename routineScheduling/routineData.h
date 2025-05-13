@@ -1,5 +1,5 @@
-#ifndef __ROUTINEDATA_H
-#define __ROUTINEDATA_H
+#ifndef ROUTINEDATA_H
+#define ROUTINEDATA_H
 
 #include <stdlib.h>
 
@@ -13,29 +13,46 @@ typedef struct {
 
 extern Coordinates homeCoords;
 
-// Enum for days of the week
-enum Weekdays { Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday };
+typedef enum {
+    MONDAY = 0,
+    TUESDAY,
+    WEDNESDAY,
+    THURSDAY,
+    FRIDAY,
+    SATURDAY,
+    SUNDAY,
+    NUM_DAYS
+} Weekday;
+
+extern const char *const weekday_names[NUM_DAYS];
 
 // A single task entry
 typedef struct {
+    int id;          // id for day order reference
     char name[32];   // Fixed size for simplicity
     int time;        // Duration of task
 } Task;
 
 // Travel destination
 typedef struct {
-    char name[32];
-    char coords[32];     // Can store coordinates as "lat,long" string
+    Coordinates coords;     // Can store coordinates
     int travelTime;      // Could be set via GMap API using home and coords
 } Destination;
 
 // A single day's plan
 typedef struct {
-    Task order[10];      // Max 10 tasks, accessed sequentially
+    Weekday weekday;
+    int task_id[MAX_TASKS];      // Max 10 task ids, accessed sequentially
+    int task_count;       // number of tasks for that day
     Destination dest;    // Destination for that day
     char name[16];       // Name of the day or plan
     int destArrival;     // Time to be at destination
 } Day;
 
+extern Day day_list[NUM_DAYS];
+extern int day_count;
+
+extern Task  task_list[MAX_TASKS];
+extern int   task_count;
 
 #endif

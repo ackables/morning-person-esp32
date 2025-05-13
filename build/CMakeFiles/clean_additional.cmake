@@ -1,7 +1,7 @@
 # Additional clean files
 cmake_minimum_required(VERSION 3.16)
 
-if("${CONFIG}" STREQUAL "" OR "${CONFIG}" STREQUAL "")
+if("${CONFIG}" STREQUAL "" OR "${CONFIG}" STREQUAL "Debug")
   file(REMOVE_RECURSE
   "esp-idf/esptool_py/flasher_args.json.in"
   "esp-idf/mbedtls/x509_crt_bundle"

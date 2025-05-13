@@ -1,7 +1,7 @@
 {
     "version":            "1.1",
     "project_name":       "morning_person_esp32",
-    "project_version":    "3c5416b-dirty",
+    "project_version":    "8869e75-dirty",
     "project_path":       "/Users/bensmith/Documents/ENGR213_214/morning-person-esp32",
     "idf_path":           "/Users/bensmith/esp/esp-idf",
     "build_dir":          "/Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build",
@@ -1765,7 +1765,7 @@
             "managed_reqs": [],
             "managed_priv_reqs": [],
             "file": "/Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build/esp-idf/routineScheduling/libroutineScheduling.a",
-            "sources": [ "/Users/bensmith/Documents/ENGR213_214/morning-person-esp32/routineScheduling/routineData.c", "/Users/bensmith/Documents/ENGR213_214/morning-person-esp32/routineScheduling/routineData.h", "/Users/bensmith/Documents/ENGR213_214/morning-person-esp32/routineScheduling/jsonParse.c", "/Users/bensmith/Documents/ENGR213_214/morning-person-esp32/routineScheduling/jsonParse.h" ],
+            "sources": [ "/Users/bensmith/Documents/ENGR213_214/morning-person-esp32/routineScheduling/routineData.c", "/Users/bensmith/Documents/ENGR213_214/morning-person-esp32/routineScheduling/routineData.h", "/Users/bensmith/Documents/ENGR213_214/morning-person-esp32/routineScheduling/jsonParse.c", "/Users/bensmith/Documents/ENGR213_214/morning-person-esp32/routineScheduling/jsonParse.h", "/Users/bensmith/Documents/ENGR213_214/morning-person-esp32/routineScheduling/routine_parser.c", "/Users/bensmith/Documents/ENGR213_214/morning-person-esp32/routineScheduling/routine_parser.h" ],
             "include_dirs": [ "." ]
         },
         "rt": {

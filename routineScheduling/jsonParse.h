@@ -1,5 +1,5 @@
-#ifndef __JSONPARSE_H
-#define __JSONPARSE_H
+#ifndef JSONPARSE_H
+#define JSONPARSE_H
 
 #include <stdio.h>
 #include <string.h>
@@ -11,7 +11,7 @@
 extern Task task_list[MAX_TASKS];
 extern int task_count;
 
-void parse_tasks(jparse_ctx_t *jctx);
+// void parse_tasks(jparse_ctx_t *jctx);
 void load_and_parse_json_file(const char *path);
 
 #endif

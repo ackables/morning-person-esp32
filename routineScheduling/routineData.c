@@ -14,6 +14,15 @@ Coordinates homeCoords = {0.0f, 0.0f};
 Task task_list[MAX_TASKS];
 int task_count = 0;
 
+
+const char *const weekday_names[NUM_DAYS] = {
+    "Monday", "Tuesday", "Wednesday",
+    "Thursday", "Friday", "Saturday", "Sunday"
+};
+
+Day day_list[NUM_DAYS] = { 0 };
+int day_count = NUM_DAYS;
+
 // // A single task entry
 // typedef struct {
 //     char name[32];   // Fixed size for simplicity
