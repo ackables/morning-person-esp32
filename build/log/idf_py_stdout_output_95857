@@ -1,0 +1,163 @@
+ets Jun  8 2016 00:22:57
+
+rst:0x1 (POWERON_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0030,len:6276
+load:0x40078000,len:15716
+load:0x40080400,len:4
+ho 8 tail 4 room 4
+load:0x40080404,len:3860
+entry 0x4008063c
+[0;32mI (30) boot: ESP-IDF v5.4 2nd stage bootloader[0m
+[0;32mI (30) boot: compile time May 13 2025 21:22:25[0m
+[0;32mI (30) boot: Multicore bootloader[0m
+[0;32mI (31) boot: chip revision: v1.0[0m
+[0;32mI (34) boot.esp32: SPI Speed      : 40MHz[0m
+[0;32mI (38) boot.esp32: SPI Mode       : DIO[0m
+[0;32mI (42) boot.esp32: SPI Flash Size : 4MB[0m
+[0;32mI (45) boot: Enabling RNG early entropy source...[0m
+[0;32mI (50) boot: Partition Table:[0m
+[0;32mI (52) boot: ## Label            Usage          Type ST Offset   Length[0m
+[0;32mI (59) boot:  0 nvs              WiFi data        01 02 00009000 00006000[0m
+[0;32mI (65) boot:  1 phy_init         RF data          01 01 0000f000 00001000[0m
+[0;32mI (72) boot:  2 factory          factory app      00 00 00010000 00190000[0m
+[0;32mI (78) boot:  3 spiffs           Unknown data     01 82 001a0000 00060000[0m
+[0;32mI (85) boot: End of partition table[0m
+[0;32mI (88) esp_image: segment 0: paddr=00010020 vaddr=3f400020 size=1c19ch (115100) map[0m
+[0;32mI (135) esp_image: segment 1: paddr=0002c1c4 vaddr=3ff80000 size=0001ch (    28) load[0m
+[0;32mI (135) esp_image: segment 2: paddr=0002c1e8 vaddr=3ffb0000 size=03e30h ( 15920) load[0m
+[0;32mI (144) esp_image: segment 3: paddr=00030020 vaddr=400d0020 size=9b550h (636240) map[0m
+[0;32mI (363) esp_image: segment 4: paddr=000cb578 vaddr=3ffb3e30 size=0013ch (   316) load[0m
+[0;32mI (364) esp_image: segment 5: paddr=000cb6bc vaddr=40080000 size=17a7ch ( 96892) load[0m
+[0;32mI (416) boot: Loaded app from partition at offset 0x10000[0m
+[0;32mI (416) boot: Disabling RNG early entropy source...[0m
+[0;32mI (427) cpu_start: Multicore app[0m
+[0;32mI (435) cpu_start: Pro cpu start user code[0m
+[0;32mI (435) cpu_start: cpu freq: 160000000 Hz[0m
+[0;32mI (435) app_init: Application information:[0m
+[0;32mI (435) app_init: Project name:     morning_person_esp32[0m
+[0;32mI (440) app_init: App version:      6cffc5b-dirty[0m
+[0;32mI (445) app_init: Compile time:     May 13 2025 21:21:47[0m
+[0;32mI (450) app_init: ELF file SHA256:  d137878ac...[0m
+[0;32mI (454) app_init: ESP-IDF:          v5.4[0m
+[0;32mI (458) efuse_init: Min chip rev:     v0.0[0m
+[0;32mI (462) efuse_init: Max chip rev:     v3.99 [0m
+[0;32mI (466) efuse_init: Chip rev:         v1.0[0m
+[0;32mI (470) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (476) heap_init: At 3FFAE6E0 len 00001920 (6 KiB): DRAM[0m
+[0;32mI (481) heap_init: At 3FFB8F58 len 000270A8 (156 KiB): DRAM[0m
+[0;32mI (486) heap_init: At 3FFE0440 len 00003AE0 (14 KiB): D/IRAM[0m
+[0;32mI (491) heap_init: At 3FFE4350 len 0001BCB0 (111 KiB): D/IRAM[0m
+[0;32mI (497) heap_init: At 40097A7C len 00008584 (33 KiB): IRAM[0m
+[0;32mI (504) spi_flash: detected chip: generic[0m
+[0;32mI (506) spi_flash: flash io: dio[0m
+[0;32mI (510) main_task: Started on CPU0[0m
+[0;32mI (512) main_task: Calling app_main()[0m
+[0;32mI (544) MAIN: SPIFFS mounted successfully[0m
+[0;32mI (570) wifi:wifi driver task: 3ffc27b4, prio:23, stack:6656, core=0[0m
+[0;32mI (583) wifi:wifi firmware version: 48ea317a7[0m
+[0;32mI (584) wifi:wifi certification version: v7.0[0m
+[0;32mI (584) wifi:config NVS flash: enabled[0m
+[0;32mI (584) wifi:config nano formatting: disabled[0m
+[0;32mI (589) wifi:Init data frame dynamic rx buffer num: 32[0m
+[0;32mI (594) wifi:Init static rx mgmt buffer num: 5[0m
+[0;32mI (598) wifi:Init management short buffer num: 32[0m
+[0;32mI (602) wifi:Init dynamic tx buffer num: 32[0m
+[0;32mI (606) wifi:Init static rx buffer size: 1600[0m
+[0;32mI (610) wifi:Init static rx buffer num: 4[0m
+[0;32mI (614) wifi:Init dynamic rx buffer num: 32[0m
+[0;32mI (619) wifi_init: rx ba win: 6[0m
+[0;32mI (620) wifi_init: accept mbox: 6[0m
+[0;32mI (623) wifi_init: tcpip mbox: 32[0m
+[0;32mI (627) wifi_init: udp mbox: 6[0m
+[0;32mI (629) wifi_init: tcp mbox: 6[0m
+[0;32mI (632) wifi_init: tcp tx win: 5760[0m
+[0;32mI (635) wifi_init: tcp rx win: 5760[0m
+[0;32mI (639) wifi_init: tcp mss: 1440[0m
+[0;32mI (641) wifi_init: WiFi IRAM OP enabled[0m
+[0;32mI (645) wifi_init: WiFi RX IRAM OP enabled[0m
+[0;32mI (653) phy_init: phy_version 4840,02e0d70,Sep  2 2024,19:39:07[0m
+[0;32mI (727) wifi:mode : sta (94:b5:55:23:60:34)[0m
+[0;32mI (728) wifi:enable tsf[0m
+[0;32mI (735) wifi:Set ps type: 1, coexist: 0[0m
+
+[0;32mI (739) MAIN: Connecting WiFi 'SBG8300-4B65'…[0m
+[0;32mI (1239) MAIN: .[0m
+[0;32mI (1739) MAIN: .[0m
+[0;32mI (2215) wifi:new:<11,0>, old:<1,0>, ap:<255,255>, sta:<11,0>, prof:1, snd_ch_cfg:0x0[0m
+[0;32mI (2217) wifi:state: init -> auth (0xb0)[0m
+[0;32mI (2224) wifi:state: auth -> assoc (0x0)[0m
+[0;32mI (2239) MAIN: .[0m
+[0;32mI (2248) wifi:state: assoc -> run (0x10)[0m
+[0;32mI (2278) wifi:connected with SBG8300-4B65, aid = 5, channel 11, BW20, bssid = 8c:5a:25:bd:c5:ac[0m
+[0;32mI (2278) wifi:security: WPA2-PSK, phy: bgn, rssi: -52[0m
+[0;32mI (2291) wifi:pm start, type: 1[0m
+
+[0;32mI (2292) wifi:dp: 1, bi: 102400, li: 3, scale listen interval from 307200 us to 307200 us[0m
+[0;32mI (2293) wifi:dp: 2, bi: 102400, li: 4, scale listen interval from 307200 us to 409600 us[0m
+[0;32mI (2299) wifi:AP's beacon interval = 102400 us, DTIM period = 2[0m
+[0;32mI (2739) MAIN: .[0m
+[0;32mI (3239) MAIN: .[0m
+[0;32mI (3739) MAIN: .[0m
+[0;32mI (4239) MAIN: .[0m
+[0;32mI (4739) MAIN: .[0m
+[0;32mI (5239) MAIN: .[0m
+[0;32mI (5739) MAIN: .[0m
+[0;32mI (6239) MAIN: .[0m
+[0;32mI (6484) esp_netif_handlers: sta ip: 192.168.0.129, mask: 255.255.255.0, gw: 192.168.0.1[0m
+[0;32mI (6739) MAIN: .[0m
+[0;32mI (6739) MAIN: WiFi connected, IP: 192.168.0.129[0m
+[0;32mI (6740) TIME_SYNC: Initializing SNTP[0m
+[0;32mI (6740) TIME_SYNC: Waiting for system time to be set... (1/5)[0m
+[0;32mI (8743) TIME_SYNC: Waiting for system time to be set... (2/5)[0m
+[0;32mI (10488) wifi:<ba-add>idx:0 (ifx:0, 8c:5a:25:bd:c5:ac), tid:0, ssn:1, winSize:64[0m
+[0;32mI (10535) TIME_SYNC: Time is synchronized[0m
+[0;32mI (10743) TIME_SYNC: Current date/time: Wed May 14 04:23:16 2025[0m
+
+[0;32mI (10749) ROUTINE_PARSER: Home coords: 37.422001, -122.084099[0m
+[0;32mI (10750) ROUTINE_PARSER: Parsed Task 0: Make Bed (3 min)[0m
+[0;32mI (10750) ROUTINE_PARSER: Parsed Task 1: Take Shower (10 min)[0m
+[0;32mI (10757) ROUTINE_PARSER: Parsed Task 2: Eat Breakfast (15 min)[0m
+[0;32mI (10762) ROUTINE_PARSER: Parsed Task 3: Commute (20 min)[0m
+[0;32mI (10768) ROUTINE_PARSER: Parsed Monday: 4 tasks, arrival=8[0m
+[0;32mI (10775) ROUTINE_PARSER: Parsed Tuesday: 3 tasks, arrival=8[0m
+[0;32mI (10780) ROUTINE_PARSER: Parsed Wednesday: 3 tasks, arrival=8[0m
+[0;32mI (10784) ROUTINE_PARSER: Parsed Thursday: 3 tasks, arrival=8[0m
+[0;32mI (10789) ROUTINE_PARSER: Parsed Friday: 3 tasks, arrival=8[0m
+[0;32mI (10795) ROUTINE_PARSER: Parsed Saturday: 2 tasks, arrival=0[0m
+[0;32mI (10800) ROUTINE_PARSER: Parsed Sunday: 1 tasks, arrival=0[0m
+[0;32mI (10805) MAIN: Total tasks parsed: 4[0m
+[0;32mI (10809) MAIN: Task[0]: id=0, name='Make Bed', time=3[0m
+[0;32mI (10814) MAIN: Task[1]: id=1, name='Take Shower', time=10[0m
+[0;32mI (10819) MAIN: Task[2]: id=2, name='Eat Breakfast', time=15[0m
+[0;32mI (10824) MAIN: Task[3]: id=3, name='Commute', time=20[0m
+[0;32mI (10829) MAIN: Total days parsed: 7[0m
+[0;32mI (10832) MAIN: Day[Monday]: taskCount=4, destArrival=8, travelTime=20, coords={37.422001, -122.084099}[0m
+[0;32mI (10841) MAIN:   -> [0] Make Bed (3 min)[0m
+[0;32mI (10845) MAIN:   -> [1] Take Shower (10 min)[0m
+[0;32mI (10849) MAIN:   -> [2] Eat Breakfast (15 min)[0m
+[0;32mI (10854) MAIN:   -> [3] Commute (20 min)[0m
+[0;32mI (10857) MAIN: Day[Tuesday]: taskCount=3, destArrival=8, travelTime=20, coords={37.422001, -122.084099}[0m
+[0;32mI (10866) MAIN:   -> [0] Make Bed (3 min)[0m
+[0;32mI (10870) MAIN:   -> [2] Eat Breakfast (15 min)[0m
+[0;32mI (10874) MAIN:   -> [3] Commute (20 min)[0m
+[0;32mI (10878) MAIN: Day[Wednesday]: taskCount=3, destArrival=8, travelTime=20, coords={37.422001, -122.084099}[0m
+[0;32mI (10888) MAIN:   -> [0] Make Bed (3 min)[0m
+[0;32mI (10891) MAIN:   -> [1] Take Shower (10 min)[0m
+[0;32mI (10895) MAIN:   -> [3] Commute (20 min)[0m
+[0;32mI (10899) MAIN: Day[Thursday]: taskCount=3, destArrival=8, travelTime=20, coords={37.422001, -122.084099}[0m
+[0;32mI (10908) MAIN:   -> [0] Make Bed (3 min)[0m
+[0;32mI (10912) MAIN:   -> [1] Take Shower (10 min)[0m
+[0;32mI (10916) MAIN:   -> [2] Eat Breakfast (15 min)[0m
+[0;32mI (10920) MAIN: Day[Friday]: taskCount=3, destArrival=8, travelTime=20, coords={37.422001, -122.084099}[0m
+[0;32mI (10930) MAIN:   -> [0] Make Bed (3 min)[0m
+[0;32mI (10933) MAIN:   -> [1] Take Shower (10 min)[0m
+[0;32mI (10937) MAIN:   -> [2] Eat Breakfast (15 min)[0m
+[0;32mI (10942) MAIN: Day[Saturday]: taskCount=2, destArrival=0, travelTime=20, coords={37.422001, -122.084099}[0m
+[0;32mI (10951) MAIN:   -> [2] Eat Breakfast (15 min)[0m
+[0;32mI (10955) MAIN:   -> [3] Commute (20 min)[0m
+[0;32mI (10959) MAIN: Day[Sunday]: taskCount=1, destArrival=0, travelTime=20, coords={37.422001, -122.084099}[0m
+[0;32mI (10968) MAIN:   -> [2] Eat Breakfast (15 min)[0m
+[0;32mI (10972) main_task: Returned from app_main()[0m
