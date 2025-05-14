@@ -10,6 +10,16 @@
     { "id": 3, "name": "Commute",       "time": 20 }
   ],
   "days": {
+    "Sunday": {
+      "task_id":     [2],
+      "taskCount":   1,
+      "dest": {
+        "destCoords": { "lat": 37.4220, "lon": -122.0841 },
+        "travelTime": 20
+      },
+      "name":        "Sunday",
+      "destArrival": 0
+    },
     "Monday": {
       "task_id":     [0, 1, 2, 3],
       "taskCount":   4,
@@ -68,16 +78,6 @@
         "travelTime": 20
       },
       "name":        "Saturday",
-      "destArrival": 0
-    },
-    "Sunday": {
-      "task_id":     [2],
-      "taskCount":   1,
-      "dest": {
-        "destCoords": { "lat": 37.4220, "lon": -122.0841 },
-        "travelTime": 20
-      },
-      "name":        "Sunday",
       "destArrival": 0
     }
   }

@@ -14,13 +14,13 @@ typedef struct {
 extern Coordinates homeCoords;
 
 typedef enum {
-    MONDAY = 0,
+    SUNDAY = 0,
+    MONDAY,
     TUESDAY,
     WEDNESDAY,
     THURSDAY,
     FRIDAY,
     SATURDAY,
-    SUNDAY,
     NUM_DAYS
 } Weekday;
 

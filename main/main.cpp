@@ -374,7 +374,7 @@ extern "C" void app_main(void) {
                  task_list[i].time);
     }
     ESP_LOGI(TAG, "Total days parsed: %d", day_count);
-    for (int wd = MONDAY; wd < NUM_DAYS; ++wd) {
+    for (int wd = SUNDAY; wd < NUM_DAYS; ++wd) {
         Day &d = day_list[wd];
         ESP_LOGI(TAG, "Day[%s]: taskCount=%d, destArrival=%d, travelTime=%d, coords={%f, %f}", 
                  weekday_names[wd],

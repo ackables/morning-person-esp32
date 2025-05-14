@@ -16,8 +16,8 @@ int task_count = 0;
 
 
 const char *const weekday_names[NUM_DAYS] = {
-    "Monday", "Tuesday", "Wednesday",
-    "Thursday", "Friday", "Saturday", "Sunday"
+    "Sunday", "Monday", "Tuesday", "Wednesday",
+    "Thursday", "Friday", "Saturday"
 };
 
 Day day_list[NUM_DAYS] = { 0 };

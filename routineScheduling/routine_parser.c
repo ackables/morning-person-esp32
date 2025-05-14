@@ -52,7 +52,7 @@ void parse_tasks(jparse_ctx_t *jctx) {
 void parse_days(jparse_ctx_t *jctx) {
     if (json_obj_get_object(jctx, "days") == OS_SUCCESS) {
         day_count = NUM_DAYS;
-        for (Weekday wd = MONDAY; wd < NUM_DAYS; ++wd) {
+        for (Weekday wd = SUNDAY; wd < NUM_DAYS; ++wd) {
             if (json_obj_get_object(jctx, weekday_names[wd]) == OS_SUCCESS) {
                 Day *d = &day_list[wd];
                 // fill in the name & enum
