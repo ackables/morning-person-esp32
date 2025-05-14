@@ -65,5 +65,6 @@ flowchart LR
 
     ESP32 -->|GPIO| GPIO
     GPIO --> EPD
-</details>
 ```
+
+</details>
