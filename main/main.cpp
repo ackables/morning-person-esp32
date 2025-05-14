@@ -112,16 +112,16 @@ extern "C" void display_task(void *pv){
 
             // 1) draw centered Day name + Date
             char dateBuf[20];
-            snprintf(dateBuf, sizeof(dateBuf),
+            snprintf(dateBuf, sizeof(dateBuf), // build date string
                      "%02d/%02d/%04hu",
                      tmnow.tm_mon+1,
                      tmnow.tm_mday,
                      tmnow.tm_year+1900);
-            const char *dayName = weekday_names[todayWd];
+            const char *dayName = weekday_names[todayWd]; // pulls cooresponding weekday name using index given by time_sync.h
             int dayW  = strlen(dayName)*Font24.Width;
             int dateW = strlen(dateBuf)*Font16.Width;
             // day
-            Paint_DrawString_EN(
+            Paint_DrawString_EN( // place string in center of display
               (W - dayW)/2,
               yStart,
               dayName,
@@ -129,7 +129,7 @@ extern "C" void display_task(void *pv){
               BLACK, WHITE
             );
             // date
-            Paint_DrawString_EN(
+            Paint_DrawString_EN( // place string centered below day name with 2px gap
               (W - dateW)/2,
               yStart + Font24.Height + gap1,
               dateBuf,
@@ -176,7 +176,7 @@ extern "C" void display_task(void *pv){
             char bufTitle[32];
             // left
             snprintf(bufTitle, sizeof(bufTitle),
-                     "Todo for %s", weekday_names[todoDay]);
+                     "Todo for %s", weekday_names[todoDay]); // build todo column header
             Paint_DrawString_EN(
               X_LEFT, yCol,
               bufTitle,
@@ -185,7 +185,7 @@ extern "C" void display_task(void *pv){
             );
             // right (right‐aligned)
             snprintf(bufTitle, sizeof(bufTitle),
-                     "Previous for %s", weekday_names[prevDay]);
+                     "Previous for %s", weekday_names[prevDay]); // build todo column for prev day header
             int tW = strlen(bufTitle)*Font16.Width;
             Paint_DrawString_EN(
               X_RIGHT + COL_W - tW,
@@ -223,7 +223,7 @@ extern "C" void display_task(void *pv){
                 );
             }
 
-            // previous (right-aligned) – no truncation, full string shifted left as needed
+            // previous (right-aligned)
             for (int i = 0; i < std::min((int)prevIdx.size(), 5); ++i) {
                 int ti = prevIdx[i];
                 int hh = startPrev[ti] / 60, mm = startPrev[ti] % 60;
@@ -279,7 +279,7 @@ extern "C" void display_task(void *pv){
             EPD_7IN5_V2_Sleep();
         }
 
-        // --- PARTIAL (every second) : redraw only the clock ---
+        // partial refresh (every second) : redraw only the clock
         {
             char clkText[16];
             snprintf(clkText,sizeof(clkText),
@@ -288,7 +288,7 @@ extern "C" void display_task(void *pv){
                      tmnow.tm_min,
                      tmnow.tm_sec);
 
-            EPD_7IN5_V2_Init_Part();
+            EPD_7IN5_V2_Init_Part(); // initialize part of the display where the time is to allow faster refresh
             Paint_SelectImage(clkBuf);
             Paint_NewImage(clkBuf, CLK_W, CLK_H, 0, WHITE);
             Paint_Clear(WHITE);
@@ -357,10 +357,6 @@ extern "C" void app_main(void) {
     tzset();
     obtain_time();
 
-    // // Parse JSON, start display task…
-    // load_and_parse_routine(path);
-    // xTaskCreatePinnedToCore(display_task_loop, "disp", 8*1024, NULL, 1, NULL, 1);
-
     // Parse JSON into data structures
     load_and_parse_routine(path);
 
@@ -416,8 +412,8 @@ extern "C" void app_main(void) {
 
 
 
-xTaskCreatePinnedToCore(
-    display_task,  // the only display worker
+xTaskCreatePinnedToCore( // pin display_task to core 1 to run continuously
+    display_task,
     "disp",
     8*1024,
     NULL,
@@ -425,5 +421,5 @@ xTaskCreatePinnedToCore(
     NULL,
     1
 );
-    // Optionally, trigger EPD update or UI here
+
 }
