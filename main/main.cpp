@@ -33,153 +33,7 @@ static const char *TAG = "MAIN";
 /* Entry point ----------------------------------------------------------------*/
 const char path[] = "/spiffs/testData.json";
 
-
-// this buffer only needs to cover REGION_W × REGION_H pixels
-static UBYTE *timeBuf;
-
-// extern "C" void display_task(void *pv) {
-//     const int W = EPD_7IN5_V2_WIDTH;
-//     const int H = EPD_7IN5_V2_HEIGHT;
-//     const int x0 = 20;
-//     const int line_h = Font16.Height + 4;
-
-//     // 1) grab “now” and today’s Day struct
-//     time_t now; struct tm tmnow;
-//     time(&now);
-//     localtime_r(&now, &tmnow);
-//     Day &dToday = day_list[tmnow.tm_wday];
-//     int nowMin    = tmnow.tm_hour*60 + tmnow.tm_min;
-//     int cutoffMin = dToday.destArrival*60 + 15;  // 15 min after arrival
-
-//     // 2) build full-screen buffer
-//     UBYTE *buf = (UBYTE*)malloc((W/8)*H);
-//     if (!buf) { ESP_LOGE(TAG,"routine_task: OOM"); vTaskDelete(NULL); }
-//     EPD_7IN5_V2_Init();
-//     Paint_NewImage(buf, W, H, ROTATE_0, WHITE);
-//     Paint_Clear(WHITE);
-
-//     int y = 20;
-
-//     // 3) draw today’s header
-//     Paint_DrawString_EN(x0, y, weekday_names[tmnow.tm_wday], &Font24, BLACK, WHITE);
-//     y += Font24.Height + 8;
-
-//     // 4) if we’re still within 15 min after destArrival, show today’s “current + next”
-//     if (nowMin <= cutoffMin) {
-//         // build today’s startMin[] array
-//         int countT = dToday.task_count;
-//         std::vector<int> startT(countT);
-//         int tarr = dToday.destArrival*60;
-//         for (int k = countT-1; k >= 0; --k) {
-//             startT[k] = (tarr -= task_list[dToday.task_id[k]].time);
-//         }
-//         // locate current/next
-//         int idxN = 0;
-//         while (idxN < countT && startT[idxN] <= nowMin) ++idxN;
-//         int idxC = std::max(0, idxN-1);
-//         idxN = idxN < countT ? idxN : countT-1;
-
-//         // draw up to two lines
-//         char linebuf[64];
-//         int lines = 1 + (idxN>idxC);
-//         for (int i = 0; i < lines; ++i) {
-//             Task &t = task_list[dToday.task_id[i?idxN:idxC]];
-//             int hh = startT[i?idxN:idxC]/60, mm = startT[i?idxN:idxC]%60;
-//             snprintf(linebuf, sizeof(linebuf), "%02d:%02d %s", hh, mm, t.name);
-//             // truncate if needed
-//             int textW = strlen(linebuf)*Font16.Width;
-//             if (x0 + textW > W) {
-//                 size_t maxC = (W - x0)/Font16.Width;
-//                 linebuf[maxC] = '\0';
-//             }
-//             Paint_DrawString_EN(x0, y + i*line_h, linebuf, &Font16, BLACK, WHITE);
-//         }
-//         y += lines*line_h + 8;
-//     } else {
-//         // past cutoff: skip drawing today’s tasks
-//         y += 8;
-//     }
-
-//     // 5) now draw “tomorrow” + its first two tasks
-//     int wd2 = (tmnow.tm_wday + 1) % NUM_DAYS;
-//     Day &d2 = day_list[wd2];
-//     Paint_DrawString_EN(x0, y, weekday_names[wd2], &Font24, BLACK, WHITE);
-//     y += Font24.Height + 8;
-
-//     // build tomorrow’s start times
-//     int count2 = d2.task_count;
-//     std::vector<int> start2(count2);
-//     int tarr2 = d2.destArrival*60;
-//     for (int k = count2-1; k >= 0; --k) {
-//         start2[k] = (tarr2 -= task_list[d2.task_id[k]].time);
-//     }
-//     // draw up to two of them
-//     char buf2[64];
-//     for (int i = 0; i < std::min(2, count2); ++i) {
-//         Task &t = task_list[d2.task_id[i]];
-//         int hh = start2[i]/60, mm = start2[i]%60;
-//         snprintf(buf2, sizeof(buf2), "%02d:%02d %s", hh, mm, t.name);
-//         int textW = strlen(buf2)*Font16.Width;
-//         if (x0 + textW > W) {
-//             size_t maxC = (W - x0)/Font16.Width;
-//             buf2[maxC] = '\0';
-//         }
-//         Paint_DrawString_EN(x0, y + i*line_h, buf2, &Font16, BLACK, WHITE);
-//     }
-
-//     // 6) blast it out
-//     EPD_7IN5_V2_Display(buf);
-//     EPD_7IN5_V2_Sleep();
-//     free(buf);
-
-//     // --- 2) Now switch to partial mode for the clock
-//     // measure HH:MM:SS
-//     const int w_text = Font24.Width * 7;
-//     const int h_text = Font24.Height;
-//     // align to bytes
-//     const int w_buf = (w_text + 7) & ~7;
-//     const int linesize = w_buf/8;
-
-//     UBYTE *clkBuf = (UBYTE*)malloc(linesize * h_text);
-//     if (!clkBuf) {
-//       ESP_LOGE(TAG, "display_task: clkBuf OOM");
-//       vTaskDelete(NULL);
-//     }
-
-//     EPD_7IN5_V2_Init_Part();
-//     Paint_SelectImage(clkBuf);
-//     Paint_NewImage(clkBuf, w_buf, h_text, 0, WHITE);
-
-//     // center coords on screen (byte-aligned)
-//     int x0_clk = ((W - w_buf)/2) & ~7;
-//     int y0_clk = (H - h_text)/2;
-
-//     for (;;) {
-//       time(&now);
-//       localtime_r(&now, &tmnow);
-
-//       PAINT_TIME pt = { 0 };
-//       pt.Hour = tmnow.tm_hour;
-//       pt.Min  = tmnow.tm_min;
-//       pt.Sec  = tmnow.tm_sec;
-
-//       Paint_Clear(WHITE);
-//       int x_in = (w_buf - w_text)/2;
-//       Paint_DrawTime(x_in, 0, &pt, &Font24, WHITE, BLACK);
-
-//       EPD_7IN5_V2_Display_Part(
-//         clkBuf,
-//         x0_clk,       y0_clk,
-//         x0_clk + w_buf - 1,
-//         y0_clk + h_text - 1
-//       );
-//       vTaskDelay(pdMS_TO_TICKS(1000));
-//     }
-// }
-
-
 #include <vector>     // for std::vector
-// …make sure you also have your usual includes above…
 
 extern "C" void display_task(void *pv){
     const int W = EPD_7IN5_V2_WIDTH;
@@ -256,7 +110,7 @@ extern "C" void display_task(void *pv){
             Paint_NewImage(fullBuf, W, H, ROTATE_0, WHITE);
             Paint_Clear(WHITE);
 
-            // 1) draw centered Day name + Date (black on white)
+            // 1) draw centered Day name + Date
             char dateBuf[20];
             snprintf(dateBuf, sizeof(dateBuf),
                      "%02d/%02d/%04hu",
@@ -318,7 +172,7 @@ extern "C" void display_task(void *pv){
                 for (int j = 0; j < d1.task_count; ++j) prevIdx.push_back(j);
             }
 
-            // 3) draw column headers (black on white)
+            // 3) draw column headers
             char bufTitle[32];
             // left
             snprintf(bufTitle, sizeof(bufTitle),
@@ -381,10 +235,10 @@ extern "C" void display_task(void *pv){
                 // measure its pixel width
                 int tw = strlen(lineBuf) * Font16.Width;
 
-                // right-align it within the COL_W box (even if that means xPrev < X_RIGHT)
+                // right-align it within the COL_W box
                 int xPrev = X_RIGHT + (COL_W - tw);
 
-                // draw it (colors unchanged)
+                // draw it
                 Paint_DrawString_EN(
                   xPrev,
                   yList + i * LINE_H,
@@ -438,7 +292,7 @@ extern "C" void display_task(void *pv){
             Paint_SelectImage(clkBuf);
             Paint_NewImage(clkBuf, CLK_W, CLK_H, 0, WHITE);
             Paint_Clear(WHITE);
-            // white text on black background for clock
+            // black text on white background for clock
             Paint_DrawString_EN(
               (CLK_W - CLK_CHARS*Font24.Width)/2,
               0,
