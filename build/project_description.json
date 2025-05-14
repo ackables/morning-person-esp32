@@ -1,7 +1,7 @@
 {
     "version":            "1.1",
     "project_name":       "morning_person_esp32",
-    "project_version":    "6cffc5b-dirty",
+    "project_version":    "b700b93-dirty",
     "project_path":       "/Users/bensmith/Documents/ENGR213_214/morning-person-esp32",
     "idf_path":           "/Users/bensmith/esp/esp-idf",
     "build_dir":          "/Users/bensmith/Documents/ENGR213_214/morning-person-esp32/build",

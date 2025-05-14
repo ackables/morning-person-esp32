@@ -1,9 +1,11 @@
 /* Includes ------------------------------------------------------------------*/
+#include <stdlib.h>
+#include <time.h> 
 #include "DEV_Config.h"
 #include "EPD.h"
 #include "GUI_Paint.h"
 #include "ImageData.h"
-#include <stdlib.h>
+#include "utility/EPD_7in5_V2.h"
 #include "esp_spiffs.h"
 #include "esp_err.h"
 #include "esp_log.h"
@@ -15,9 +17,12 @@
 #include <WiFi.h>
 #include "nvs_flash.h"
 #include "wifi_creds.h"
+#include <vector>
 
 extern "C" {
     #include "jsonParse.h"
+    #include <stdlib.h>
+    #include <time.h> 
     extern const char* esp_err_to_name(esp_err_t code);
     extern const char* ssid;
     extern const char* pass;
@@ -27,6 +32,434 @@ static const char *TAG = "MAIN";
 
 /* Entry point ----------------------------------------------------------------*/
 const char path[] = "/spiffs/testData.json";
+
+
+// this buffer only needs to cover REGION_W × REGION_H pixels
+static UBYTE *timeBuf;
+
+// extern "C" void display_task(void *pv) {
+//     const int W = EPD_7IN5_V2_WIDTH;
+//     const int H = EPD_7IN5_V2_HEIGHT;
+//     const int x0 = 20;
+//     const int line_h = Font16.Height + 4;
+
+//     // 1) grab “now” and today’s Day struct
+//     time_t now; struct tm tmnow;
+//     time(&now);
+//     localtime_r(&now, &tmnow);
+//     Day &dToday = day_list[tmnow.tm_wday];
+//     int nowMin    = tmnow.tm_hour*60 + tmnow.tm_min;
+//     int cutoffMin = dToday.destArrival*60 + 15;  // 15 min after arrival
+
+//     // 2) build full-screen buffer
+//     UBYTE *buf = (UBYTE*)malloc((W/8)*H);
+//     if (!buf) { ESP_LOGE(TAG,"routine_task: OOM"); vTaskDelete(NULL); }
+//     EPD_7IN5_V2_Init();
+//     Paint_NewImage(buf, W, H, ROTATE_0, WHITE);
+//     Paint_Clear(WHITE);
+
+//     int y = 20;
+
+//     // 3) draw today’s header
+//     Paint_DrawString_EN(x0, y, weekday_names[tmnow.tm_wday], &Font24, BLACK, WHITE);
+//     y += Font24.Height + 8;
+
+//     // 4) if we’re still within 15 min after destArrival, show today’s “current + next”
+//     if (nowMin <= cutoffMin) {
+//         // build today’s startMin[] array
+//         int countT = dToday.task_count;
+//         std::vector<int> startT(countT);
+//         int tarr = dToday.destArrival*60;
+//         for (int k = countT-1; k >= 0; --k) {
+//             startT[k] = (tarr -= task_list[dToday.task_id[k]].time);
+//         }
+//         // locate current/next
+//         int idxN = 0;
+//         while (idxN < countT && startT[idxN] <= nowMin) ++idxN;
+//         int idxC = std::max(0, idxN-1);
+//         idxN = idxN < countT ? idxN : countT-1;
+
+//         // draw up to two lines
+//         char linebuf[64];
+//         int lines = 1 + (idxN>idxC);
+//         for (int i = 0; i < lines; ++i) {
+//             Task &t = task_list[dToday.task_id[i?idxN:idxC]];
+//             int hh = startT[i?idxN:idxC]/60, mm = startT[i?idxN:idxC]%60;
+//             snprintf(linebuf, sizeof(linebuf), "%02d:%02d %s", hh, mm, t.name);
+//             // truncate if needed
+//             int textW = strlen(linebuf)*Font16.Width;
+//             if (x0 + textW > W) {
+//                 size_t maxC = (W - x0)/Font16.Width;
+//                 linebuf[maxC] = '\0';
+//             }
+//             Paint_DrawString_EN(x0, y + i*line_h, linebuf, &Font16, BLACK, WHITE);
+//         }
+//         y += lines*line_h + 8;
+//     } else {
+//         // past cutoff: skip drawing today’s tasks
+//         y += 8;
+//     }
+
+//     // 5) now draw “tomorrow” + its first two tasks
+//     int wd2 = (tmnow.tm_wday + 1) % NUM_DAYS;
+//     Day &d2 = day_list[wd2];
+//     Paint_DrawString_EN(x0, y, weekday_names[wd2], &Font24, BLACK, WHITE);
+//     y += Font24.Height + 8;
+
+//     // build tomorrow’s start times
+//     int count2 = d2.task_count;
+//     std::vector<int> start2(count2);
+//     int tarr2 = d2.destArrival*60;
+//     for (int k = count2-1; k >= 0; --k) {
+//         start2[k] = (tarr2 -= task_list[d2.task_id[k]].time);
+//     }
+//     // draw up to two of them
+//     char buf2[64];
+//     for (int i = 0; i < std::min(2, count2); ++i) {
+//         Task &t = task_list[d2.task_id[i]];
+//         int hh = start2[i]/60, mm = start2[i]%60;
+//         snprintf(buf2, sizeof(buf2), "%02d:%02d %s", hh, mm, t.name);
+//         int textW = strlen(buf2)*Font16.Width;
+//         if (x0 + textW > W) {
+//             size_t maxC = (W - x0)/Font16.Width;
+//             buf2[maxC] = '\0';
+//         }
+//         Paint_DrawString_EN(x0, y + i*line_h, buf2, &Font16, BLACK, WHITE);
+//     }
+
+//     // 6) blast it out
+//     EPD_7IN5_V2_Display(buf);
+//     EPD_7IN5_V2_Sleep();
+//     free(buf);
+
+//     // --- 2) Now switch to partial mode for the clock
+//     // measure HH:MM:SS
+//     const int w_text = Font24.Width * 7;
+//     const int h_text = Font24.Height;
+//     // align to bytes
+//     const int w_buf = (w_text + 7) & ~7;
+//     const int linesize = w_buf/8;
+
+//     UBYTE *clkBuf = (UBYTE*)malloc(linesize * h_text);
+//     if (!clkBuf) {
+//       ESP_LOGE(TAG, "display_task: clkBuf OOM");
+//       vTaskDelete(NULL);
+//     }
+
+//     EPD_7IN5_V2_Init_Part();
+//     Paint_SelectImage(clkBuf);
+//     Paint_NewImage(clkBuf, w_buf, h_text, 0, WHITE);
+
+//     // center coords on screen (byte-aligned)
+//     int x0_clk = ((W - w_buf)/2) & ~7;
+//     int y0_clk = (H - h_text)/2;
+
+//     for (;;) {
+//       time(&now);
+//       localtime_r(&now, &tmnow);
+
+//       PAINT_TIME pt = { 0 };
+//       pt.Hour = tmnow.tm_hour;
+//       pt.Min  = tmnow.tm_min;
+//       pt.Sec  = tmnow.tm_sec;
+
+//       Paint_Clear(WHITE);
+//       int x_in = (w_buf - w_text)/2;
+//       Paint_DrawTime(x_in, 0, &pt, &Font24, WHITE, BLACK);
+
+//       EPD_7IN5_V2_Display_Part(
+//         clkBuf,
+//         x0_clk,       y0_clk,
+//         x0_clk + w_buf - 1,
+//         y0_clk + h_text - 1
+//       );
+//       vTaskDelay(pdMS_TO_TICKS(1000));
+//     }
+// }
+
+
+#include <vector>     // for std::vector
+// …make sure you also have your usual includes above…
+
+extern "C" void display_task(void *pv){
+    const int W = EPD_7IN5_V2_WIDTH;
+    const int H = EPD_7IN5_V2_HEIGHT;
+
+    // small vertical gaps
+    const int gap1 = 2;
+    const int gap2 = 5;
+
+    // clock dims for "HH:MM:SS"
+    const int CLK_CHARS = 8;
+    const int CLK_W     = (Font24.Width * CLK_CHARS + 7) & ~7;
+    const int CLK_H     = Font24.Height;
+
+    // height of (dayName + gap1 + date + gap2 + clock)
+    const int centerH = Font24.Height + gap1 + Font16.Height + gap2 + CLK_H;
+    // top of that block, to vertically center
+    const int yStart  = (H - centerH)/2;
+
+    // columns at very top
+    const int COL_W   = Font16.Width * 12; // ~12 chars wide
+    const int X_LEFT  = 20;
+    const int X_RIGHT = W - 20 - COL_W;
+    const int yCol    = 4; // 4px down from top for headers
+
+    // buffers
+    UBYTE *fullBuf = (UBYTE*)malloc((W/8)*H);
+    UBYTE *clkBuf  = (UBYTE*)malloc((CLK_W/8)*CLK_H);
+    if (!fullBuf || !clkBuf) {
+        ESP_LOGE(TAG, "display_task: OOM");
+        vTaskDelete(NULL);
+    }
+
+    int lastIdxNext      = -1;
+    bool lastWithinCutoff = false;
+    int lastDayOfMonth   = -1;
+
+    for (;;) {
+        time_t now; struct tm tmnow;
+        time(&now);
+        localtime_r(&now, &tmnow);
+        int nowMin    = tmnow.tm_hour*60 + tmnow.tm_min;
+        int todayWd   = tmnow.tm_wday;
+        int todayDate = tmnow.tm_mday;
+
+        // build today’s start times
+        Day &dToday = day_list[todayWd];
+        int nT = dToday.task_count;
+        std::vector<int> startT(nT);
+        int tarr = dToday.destArrival * 60;
+        for (int k = nT-1; k >= 0; --k) {
+            tarr -= task_list[dToday.task_id[k]].time;
+            startT[k] = tarr;
+        }
+
+        // find next index and cutoff
+        int idxNext = 0;
+        while (idxNext < nT && startT[idxNext] <= nowMin) {
+            ++idxNext;
+        }
+        bool withinCutoff = nowMin <= (dToday.destArrival*60 + 15);
+
+        // only full–refresh when day-of-month, idxNext or cutoff changes
+        if (idxNext       != lastIdxNext
+         || withinCutoff != lastWithinCutoff
+         || todayDate    != lastDayOfMonth)
+        {
+            lastIdxNext      = idxNext;
+            lastWithinCutoff = withinCutoff;
+            lastDayOfMonth   = todayDate;
+
+            // --- FULL SCREEN REFRESH ---
+            EPD_7IN5_V2_Init();
+            Paint_NewImage(fullBuf, W, H, ROTATE_0, WHITE);
+            Paint_Clear(WHITE);
+
+            // 1) draw centered Day name + Date (black on white)
+            char dateBuf[20];
+            snprintf(dateBuf, sizeof(dateBuf),
+                     "%02d/%02d/%04hu",
+                     tmnow.tm_mon+1,
+                     tmnow.tm_mday,
+                     tmnow.tm_year+1900);
+            const char *dayName = weekday_names[todayWd];
+            int dayW  = strlen(dayName)*Font24.Width;
+            int dateW = strlen(dateBuf)*Font16.Width;
+            // day
+            Paint_DrawString_EN(
+              (W - dayW)/2,
+              yStart,
+              dayName,
+              &Font24,
+              BLACK, WHITE
+            );
+            // date
+            Paint_DrawString_EN(
+              (W - dateW)/2,
+              yStart + Font24.Height + gap1,
+              dateBuf,
+              &Font16,
+              BLACK, WHITE
+            );
+
+            // 2) split into prev/todo (and roll forward/back if empty)
+            std::vector<int> prevIdx, todoIdx;
+            for (int i = 0; i < nT; ++i) {
+                if (startT[i] + 15 < nowMin) prevIdx.push_back(i);
+                else                           todoIdx.push_back(i);
+            }
+            // ... roll todo to tomorrow if empty ...
+            int todoDay = todayWd, prevDay = todayWd;
+            std::vector<int> startTodo = startT, startPrev = startT;
+
+            if (todoIdx.empty()) {
+                todoDay = (todayWd + 1) % NUM_DAYS;
+                Day &d2 = day_list[todoDay];
+                startTodo.resize(d2.task_count);
+                int m2 = d2.destArrival * 60;
+                for (int k = d2.task_count-1; k>=0; --k) {
+                    m2 -= task_list[d2.task_id[k]].time;
+                    startTodo[k] = m2;
+                }
+                todoIdx.clear();
+                for (int j = 0; j < d2.task_count; ++j) todoIdx.push_back(j);
+            }
+            if (prevIdx.empty()) {
+                prevDay = (todayWd + NUM_DAYS - 1) % NUM_DAYS;
+                Day &d1 = day_list[prevDay];
+                startPrev.resize(d1.task_count);
+                int m1 = d1.destArrival * 60;
+                for (int k = d1.task_count-1; k>=0; --k) {
+                    m1 -= task_list[d1.task_id[k]].time;
+                    startPrev[k] = m1;
+                }
+                prevIdx.clear();
+                for (int j = 0; j < d1.task_count; ++j) prevIdx.push_back(j);
+            }
+
+            // 3) draw column headers (black on white)
+            char bufTitle[32];
+            // left
+            snprintf(bufTitle, sizeof(bufTitle),
+                     "Todo for %s", weekday_names[todoDay]);
+            Paint_DrawString_EN(
+              X_LEFT, yCol,
+              bufTitle,
+              &Font16,
+              BLACK, WHITE
+            );
+            // right (right‐aligned)
+            snprintf(bufTitle, sizeof(bufTitle),
+                     "Previous for %s", weekday_names[prevDay]);
+            int tW = strlen(bufTitle)*Font16.Width;
+            Paint_DrawString_EN(
+              X_RIGHT + COL_W - tW,
+              yCol,
+              bufTitle,
+              &Font16,
+              BLACK, WHITE
+            );
+
+            // 4) draw up to 5 tasks under each (white on black)
+            const int LINE_H = Font16.Height + 4;
+            int yList = yCol + Font16.Height + 4;
+            char lineBuf[64];
+
+            // todo
+            for (int i = 0; i < std::min((int)todoIdx.size(), 5); ++i) {
+                int ti = todoIdx[i];
+                int hh = startTodo[ti]/60, mm = startTodo[ti]%60;
+                const char *nm = (todoDay==todayWd)
+                  ? task_list[dToday.task_id[ti]].name
+                  : task_list[day_list[todoDay].task_id[ti]].name;
+                snprintf(lineBuf, sizeof(lineBuf),
+                         "%02d:%02d %s", hh, mm, nm);
+                int tw = strlen(lineBuf)*Font16.Width;
+                if (X_LEFT + tw > W) {
+                    size_t mc = (W - X_LEFT)/Font16.Width;
+                    lineBuf[mc] = '\0';
+                }
+                Paint_DrawString_EN(
+                  X_LEFT,
+                  yList + i*LINE_H,
+                  lineBuf,
+                  &Font16,
+                  WHITE, BLACK
+                );
+            }
+
+            // previous (right-aligned) – no truncation, full string shifted left as needed
+            for (int i = 0; i < std::min((int)prevIdx.size(), 5); ++i) {
+                int ti = prevIdx[i];
+                int hh = startPrev[ti] / 60, mm = startPrev[ti] % 60;
+                const char* nm = task_list[ day_list[prevDay].task_id[ti] ].name;
+
+                // build the full entry
+                snprintf(lineBuf, sizeof(lineBuf), "%02d:%02d %s", hh, mm, nm);
+
+                // measure its pixel width
+                int tw = strlen(lineBuf) * Font16.Width;
+
+                // right-align it within the COL_W box (even if that means xPrev < X_RIGHT)
+                int xPrev = X_RIGHT + (COL_W - tw);
+
+                // draw it (colors unchanged)
+                Paint_DrawString_EN(
+                  xPrev,
+                  yList + i * LINE_H,
+                  lineBuf,
+                  &Font16,
+                  WHITE,
+                  BLACK
+                );
+            }
+
+            // 5) optional “Current Task” if next <15min away
+            if (withinCutoff && idxNext < nT) {
+                int when = startT[idxNext];
+                if (when>nowMin && when-nowMin<=15) {
+                    int cx = (W - Font16.Width*12)/2;
+                    int cy = yCol + Font16.Height + 4;
+                    Paint_DrawString_EN(
+                      cx, cy,
+                      "Current Task",
+                      &Font16,
+                      BLACK, WHITE
+                    );
+                    snprintf(lineBuf,sizeof(lineBuf),
+                             "%02d:%02d %s",
+                             when/60, when%60,
+                             task_list[dToday.task_id[idxNext]].name);
+                    Paint_DrawString_EN(
+                      cx, cy+LINE_H,
+                      lineBuf,
+                      &Font16,
+                      WHITE, BLACK
+                    );
+                }
+            }
+
+            // push the full‐screen update
+            EPD_7IN5_V2_Display(fullBuf);
+            EPD_7IN5_V2_Sleep();
+        }
+
+        // --- PARTIAL (every second) : redraw only the clock ---
+        {
+            char clkText[16];
+            snprintf(clkText,sizeof(clkText),
+                     "%02d:%02d:%02d",
+                     tmnow.tm_hour,
+                     tmnow.tm_min,
+                     tmnow.tm_sec);
+
+            EPD_7IN5_V2_Init_Part();
+            Paint_SelectImage(clkBuf);
+            Paint_NewImage(clkBuf, CLK_W, CLK_H, 0, WHITE);
+            Paint_Clear(WHITE);
+            // white text on black background for clock
+            Paint_DrawString_EN(
+              (CLK_W - CLK_CHARS*Font24.Width)/2,
+              0,
+              clkText,
+              &Font24,
+              WHITE, BLACK
+            );
+
+            int x0 = ((W - CLK_W)/2) & ~7;
+            int y0 = yStart + Font24.Height + gap1 + Font16.Height + gap2;
+            EPD_7IN5_V2_Display_Part(
+              clkBuf,
+              x0,    y0,
+              x0+CLK_W-1,
+              y0+CLK_H-1
+            );
+        }
+
+        vTaskDelay(pdMS_TO_TICKS(1000));
+    }
+}
 
 extern "C" void app_main(void) {
 
@@ -66,6 +499,8 @@ extern "C" void app_main(void) {
     ESP_LOGI(TAG, "WiFi connected, IP: %s", WiFi.localIP().toString().c_str());
 
     // Now that we have an IP, sync time
+    setenv("TZ", "PST8PDT,M3.2.0/2,M11.1.0/2", 1);
+    tzset();
     obtain_time();
 
     // // Parse JSON, start display task…
@@ -102,6 +537,39 @@ extern "C" void app_main(void) {
             }
         }
     }
+    const int width  = EPD_7IN5_V2_WIDTH;
+    const int height = EPD_7IN5_V2_HEIGHT;
+    // 1 bit per pixel → width/8 bytes per scanline
+    UBYTE *buffer = (UBYTE*)malloc((width / 8) * height);
 
+
+    // set up all GPIO pins & SPI for the e-paper
+    if (DEV_Module_Init() != 0) {
+      ESP_LOGE(TAG, "DEV Module init failed");
+      return;
+    }
+
+    Paint_NewImage(buffer, width, height, ROTATE_0, WHITE);
+    Paint_Clear(WHITE);
+    Paint_DrawString_EN(20, 60, "Good Morning!", &Font16, WHITE, BLACK);
+
+    EPD_7IN5_V2_Init();
+    EPD_7IN5_V2_Clear();
+    EPD_7IN5_V2_Display(buffer);
+    EPD_7IN5_V2_Sleep();
+
+    free(buffer);
+
+
+
+xTaskCreatePinnedToCore(
+    display_task,  // the only display worker
+    "disp",
+    8*1024,
+    NULL,
+    1,
+    NULL,
+    1
+);
     // Optionally, trigger EPD update or UI here
 }
