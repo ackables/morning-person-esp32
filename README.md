@@ -1,5 +1,66 @@
 # Morning Person ESP32
 
+## Abstracted Overview
+```mermaid
+flowchart TD
+  %% === System Overview: Morning Person ESP32 ===
+
+  %% Hardware Section
+  subgraph "Hardware Components"
+    ESP32["ESP32 SoC"]
+    NVS["NVS Partition"]
+    FLASH["SPI Flash"]
+    EPD["E-Paper Display (7.5)"]
+
+
+    %% Functional Firmware Layers
+    subgraph "System Services"
+        NVS_INIT["Initialize Storage"]
+        FS["Mount File System"]
+    end
+
+    subgraph "Connectivity Layer"
+        WIFI["Connect to WiFi"]
+        SNTP["Synchronize Time (SNTP)"]
+    end
+
+    subgraph "Routine & Data Layer"
+        ROUTINE["Load Routine JSON"]
+        DATA["Extract Task & Day Data"]
+    end
+
+    subgraph "Core Logic"
+        DISPLAY["Schedule & Display Logic"]
+    end
+
+    subgraph "Display Pipeline"
+        GUI["Render Layout (GUI Layer)"]
+        EPD_DRV["E-Paper Driver"]
+    end
+
+    subgraph "Peripherals"
+        SPI_BUS["SPI Interface"]
+        GPIO["GPIO Control Lines"]
+    end
+  end
+
+  
+
+  %% User Output
+  USER_VIEW["What the User Sees: 
+  Task List on E-Paper Display"]
+
+  %% Connections
+  ESP32 --> NVS --> NVS_INIT --> WIFI --> SNTP --> DISPLAY
+  ESP32 --> FLASH --> FS --> ROUTINE --> DATA --> DISPLAY
+  DISPLAY --> GUI --> EPD_DRV
+  EPD_DRV -->|SPI| SPI_BUS --> EPD
+  EPD_DRV -->|GPIO| GPIO --> EPD
+  EPD --> USER_VIEW
+```
+
+## Detailed Overview
+
 ```mermaid
 flowchart LR
   %% Hardware group
@@ -61,3 +122,4 @@ flowchart LR
   EPD_DRV -->|GPIO| GPIO
   GPIO --> EPD
 ```
+
