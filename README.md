@@ -2,6 +2,7 @@
 
 <details>
 <summary>Click to expand the Mermaid diagram</summary>
+
 ```mermaid
 flowchart LR
     subgraph Hardware
@@ -64,5 +65,5 @@ flowchart LR
 
     ESP32 -->|GPIO| GPIO
     GPIO --> EPD
-    ```
 </details>
+```
