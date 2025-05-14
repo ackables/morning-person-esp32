@@ -1,12 +1,8 @@
 # Morning Person ESP32
 
-<details>
-<summary>Click to expand the Mermaid diagram</summary>
-
 ```mermaid
 flowchart LR
-
-  %% Hardware subgraph
+  %% Hardware group
   subgraph Hardware
     ESP32["ESP32 SoC"]
     NVS["NVS Partition"]
@@ -14,13 +10,11 @@ flowchart LR
     (EPD_7IN5_V2)"]
     FLASH["SPI Flash"]
 
-    subgraph Firmware
+  subgraph Firmware
     NVS_INIT["NVS Init
     (nvs_flash)"]
     FS["SPIFFS File System"]
-    JSON["JSON Parser
-    (jsonParse)"]
-    ROUTINE["Routine Parser
+    ROUTINE["JSON & Routine Parser
     (routine_parser)"]
     DATA["Task & Day Data
     (routineData)"]
@@ -28,46 +22,42 @@ flowchart LR
     (WiFi.begin + wifi_creds.h)"]
     SNTP["SNTP Time Sync
     (time_sync)"]
-    DISPLAY["Display Task
-    (display_task/clock_task)"]
+    DISPLAY["Display Task and Timer Logic
+    (display_task)"]
     GUI["GUI & Paint
-    (GUI_Paint, ImageData)"]
-    EPD_DRV["EPD Driver
-    (utility/EPD_7in5_V2)"]
+    (GUI_Paint, utility/EPD_7in5_V2)"]
+    EPD_DRV["Display Driver
+    (utility/EPD_7in5_V2.h, EPD.h, DEV_Config.h)"]
   end
 
     subgraph Peripherals
       SPI_BUS["SPI Interface"]
       GPIO["GPIO Control Lines"]
     end
-    
   end
 
-  %% Draw your arrows
-  ESP32 -->|SPI| SPI_BUS
+  %% Firmware group (moved out to be a sibling of Hardware)
+
+
+  %% Connections
+  EPD_DRV -->|SPI| SPI_BUS
   SPI_BUS --> EPD
   ESP32 --> FLASH
   FLASH --> FS
   ESP32 --> NVS
-
-  %% NOW this arrow has a clear “line of sight” to NVS_INIT above it
   NVS --> NVS_INIT
 
-  %% firmware flow
   NVS_INIT --> WIFI
   WIFI --> SNTP
   SNTP --> DISPLAY
 
-  FS --> JSON
-  JSON --> ROUTINE
+  FS --> ROUTINE
   ROUTINE --> DATA
   DATA --> DISPLAY
 
-  GUI --> DISPLAY
-  EPD_DRV --> DISPLAY
+  DISPLAY --> GUI
+  GUI --> EPD_DRV
 
-  ESP32 -->|GPIO| GPIO
+  EPD_DRV -->|GPIO| GPIO
   GPIO --> EPD
 ```
-
-</details>
